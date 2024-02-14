@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChalkboardChat.UI", "ChalkboardChat.UI\ChalkboardChat.UI.csproj", "{66BF95BB-953E-4BAD-837C-A4DDC2A0C704}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChalkboardChat.App", "ChalkboardChat.App\ChalkboardChat.App.csproj", "{D0D1F8A1-1F30-420B-B34C-4452522BA095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChalkboardChat.Data", "ChalkboardChat.Data\ChalkboardChat.Data.csproj", "{3A56531E-05CB-43CA-A551-9E3695AE4B39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{66BF95BB-953E-4BAD-837C-A4DDC2A0C704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66BF95BB-953E-4BAD-837C-A4DDC2A0C704}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66BF95BB-953E-4BAD-837C-A4DDC2A0C704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D1F8A1-1F30-420B-B34C-4452522BA095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D1F8A1-1F30-420B-B34C-4452522BA095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D1F8A1-1F30-420B-B34C-4452522BA095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D1F8A1-1F30-420B-B34C-4452522BA095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A56531E-05CB-43CA-A551-9E3695AE4B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A56531E-05CB-43CA-A551-9E3695AE4B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A56531E-05CB-43CA-A551-9E3695AE4B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A56531E-05CB-43CA-A551-9E3695AE4B39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
