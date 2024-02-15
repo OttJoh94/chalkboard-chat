@@ -1,6 +1,7 @@
 using ChalkboardChat.Data.Database;
 using ChalkboardChat.Data.Models;
 using ChalkboardChat.Data.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ChalkboardChat.UI.Pages
@@ -9,9 +10,9 @@ namespace ChalkboardChat.UI.Pages
 	{
 		private readonly MessageRepository repo;
 
-		public OttoTestPageModel(AppDbContext context)
+		public OttoTestPageModel(AppDbContext appContext, AuthDbContext authContext, SignInManager<IdentityUser> s)
 		{
-			repo = new(context);
+			repo = new(appContext, authContext, s);
 		}
 
 		public async Task OnGet()

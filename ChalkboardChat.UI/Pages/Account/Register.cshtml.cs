@@ -13,8 +13,6 @@ namespace ChalkboardChat.UI.Pages.Account
 		[BindProperty]
 		public string? Password { get; set; }
 		public string ErrorMessage { get; set; }
-		public bool RegisterSuccess { get; set; } = false;
-
 
 
 		public void OnGet()
@@ -35,7 +33,8 @@ namespace ChalkboardChat.UI.Pages.Account
 			}
 
 			ErrorMessage = "Couldn't register user, try something else";
-			RegisterSuccess = true;
+
+			TempData["ErrorMessage"] = ErrorMessage;
 
 			return Page();
 		}

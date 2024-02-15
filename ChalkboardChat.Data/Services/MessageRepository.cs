@@ -1,27 +1,30 @@
 ﻿using ChalkboardChat.Data.Database;
 using ChalkboardChat.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChalkboardChat.Data.Services
 {
-	public class MessageRepository(AppDbContext context)
+	public class MessageRepository(AppDbContext appContext, AuthDbContext authContext, SignInManager<IdentityUser> signInManager)
 	{
-		private readonly AppDbContext context = context;
+		private readonly AppDbContext appContext = appContext;
+		private readonly AuthDbContext authContext = authContext;
+		private readonly SignInManager<IdentityUser> signInManager = signInManager;
 
 		public async Task<List<MessageModel>> GetAllAsync()
 		{
-			return await context.Messages.ToListAsync();
+			return await appContext.Messages.OrderByDescending(m => m.Date).ToListAsync();
 		}
 
 		public async Task<MessageModel?> GetMessageByIdAsync(int id)
 		{
-			return await context.Messages.FirstOrDefaultAsync(m => m.Id == id);
+			return await appContext.Messages.FirstOrDefaultAsync(m => m.Id == id);
 		}
 
 		public async Task AddMessageAsync(MessageModel messageToAdd)
 		{
-			await context.Messages.AddAsync(messageToAdd);
-			await context.SaveChangesAsync();
+			await appContext.Messages.AddAsync(messageToAdd);
+			await appContext.SaveChangesAsync();
 		}
 
 		public async Task UpdateMessageAsync(MessageModel updatedMessage)
@@ -34,7 +37,7 @@ namespace ChalkboardChat.Data.Services
 				messageToUpdate.Message = updatedMessage.Message;
 				messageToUpdate.Date = updatedMessage.Date;
 
-				await context.SaveChangesAsync();
+				await appContext.SaveChangesAsync();
 			}
 		}
 
@@ -42,8 +45,8 @@ namespace ChalkboardChat.Data.Services
 		{
 			try
 			{
-				context.Messages.Remove(messageToDelete);
-				await context.SaveChangesAsync();
+				appContext.Messages.Remove(messageToDelete);
+				await appContext.SaveChangesAsync();
 			}
 			catch
 			{
@@ -60,8 +63,8 @@ namespace ChalkboardChat.Data.Services
 
 				if (messageToDelete != null)
 				{
-					context.Messages.Remove(messageToDelete);
-					await context.SaveChangesAsync();
+					appContext.Messages.Remove(messageToDelete);
+					await appContext.SaveChangesAsync();
 				}
 			}
 			catch
@@ -69,6 +72,49 @@ namespace ChalkboardChat.Data.Services
 				//Couldn't find messageToDelete in Db
 			}
 		}
+
+		public async Task UpdateUsername(string currentUsername, string newUsername)
+		{
+			IdentityUser? currentUser = authContext.Users.FirstOrDefault(u => u.UserName == currentUsername);
+
+			if (currentUser == null) return;
+
+			currentUser.UserName = newUsername;
+			await authContext.SaveChangesAsync();
+
+			var allMessages = await GetAllAsync();
+			foreach (var message in allMessages)
+			{
+				if (message.Username == currentUsername)
+				{
+					message.Username = newUsername;
+				}
+			}
+
+			await appContext.SaveChangesAsync();
+		}
+
+		public async Task DeleteUserAsync(string username)
+		{
+			IdentityUser? currentUser = authContext.Users.FirstOrDefault(u => u.UserName == username);
+
+			if (currentUser == null) return;
+
+			authContext.Users.Remove(currentUser);
+			await authContext.SaveChangesAsync();
+
+			var allMessages = await GetAllAsync();
+			foreach (var message in allMessages)
+			{
+				if (message.Username == username)
+				{
+					message.Username = "{deleted user}";
+				}
+			}
+
+			await appContext.SaveChangesAsync();
+		}
+
 
 
 	}

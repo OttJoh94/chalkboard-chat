@@ -14,10 +14,11 @@
 			<input type="password" asp-for="Password" placeholder="Password" />
 			<input type="submit" class="btn btn-success mt-2" value="Register"/>
 		</form>
-
-		@if(!Model.RegisterSuccess)
+		<br />
+		<br />
+		@if(TempData["ErrorMessage"] != null)
 		{
-			<h4>@Model.ErrorMessage</h4>
+			<h4>@TempData["ErrorMessage"]</h4>
 		}
 
 	</div>
