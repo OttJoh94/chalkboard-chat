@@ -1,0 +1,52 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@model ChalkboardChat.UI.Pages.Message.IndexModel
+@{
+}
+@inject SignInManager<IdentityUser> signInManager
+
+
+<h1>Here are all messages</h1>
+
+<div class="row">
+	<div class="col-3">
+		@if(Model.AllMessages != null)
+		{
+			@foreach (var message in Model.AllMessages)
+			{
+				@if(Model.SignedInUser.UserName == message.Username)
+				{
+					<div class="card" style="width: 18rem;">
+						<div class="card-body bg-success bg-opacity-25">
+							<h5 class="card-title">@message.Username</h5>
+							<p class="card-text">@message.Message</p>
+						</div>
+					</div>
+				}
+				else
+				{
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<h5 class="card-title">@message.Username</h5>
+							<p class="card-text">@message.Message</p>
+						</div>
+					</div>
+				}
+			}
+		}
+	</div>
+	<div class="col-3 flex-column justify-content-center">
+		<form method="post">
+			<h3>Write your message:</h3>
+			<input type="text" placeholder="Message" asp-for="Message"/>
+			<input type="submit" value="Send"/>
+		</form>
+		<div class="h-25 text-center"></div>
+		<form method="post">
+			<input type="submit" asp-page-handler="SignOut" value="Sign Out" class="btn btn-danger" />
+		</form>
+	</div>
+	<div class="col-3 w-50 justify-content-center text-center">
+		
+	</div>
+</div>

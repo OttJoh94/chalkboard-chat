@@ -1,0 +1,24 @@
+﻿@page
+@model ChalkboardChat.UI.Pages.Account.RegisterModel
+@{
+}
+
+<h1 class="text-center">Register page</h1>
+
+<div class="container row justify-content-center">
+	<div class="col-2 flex-column text-center">
+		<form method="post" class="justify-content-center">
+			<h2>Username</h2>
+			<input type="text" asp-for="Username" placeholder="Username"/>
+			<h2>Password</h2>
+			<input type="password" asp-for="Password" placeholder="Password" />
+			<input type="submit" class="btn btn-success mt-2" value="Register"/>
+		</form>
+
+		@if(!Model.RegisterSuccess)
+		{
+			<h4>@Model.ErrorMessage</h4>
+		}
+
+	</div>
+</div>

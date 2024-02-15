@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChalkboardChat.UI", "ChalkboardChat.UI\ChalkboardChat.UI.csproj", "{66BF95BB-953E-4BAD-837C-A4DDC2A0C704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChalkboardChat.UI", "ChalkboardChat.UI\ChalkboardChat.UI.csproj", "{66BF95BB-953E-4BAD-837C-A4DDC2A0C704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChalkboardChat.App", "ChalkboardChat.App\ChalkboardChat.App.csproj", "{D0D1F8A1-1F30-420B-B34C-4452522BA095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChalkboardChat.App", "ChalkboardChat.App\ChalkboardChat.App.csproj", "{D0D1F8A1-1F30-420B-B34C-4452522BA095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChalkboardChat.Data", "ChalkboardChat.Data\ChalkboardChat.Data.csproj", "{3A56531E-05CB-43CA-A551-9E3695AE4B39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChalkboardChat.Data", "ChalkboardChat.Data\ChalkboardChat.Data.csproj", "{3A56531E-05CB-43CA-A551-9E3695AE4B39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
