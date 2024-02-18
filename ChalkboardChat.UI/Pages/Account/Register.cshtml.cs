@@ -4,70 +4,75 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ChalkboardChat.UI.Pages.Account
 {
-	public class RegisterModel : PageModel
-	{
-		private readonly SignInManager<IdentityUser> _signInManager;
-		private readonly UserManager<IdentityUser> _userManager;
+
+    [BindProperties]
+
+    public class RegisterModel : PageModel
+    {
 
 
-		public string? Username { get; set; }
-
-		public string? Password { get; set; }
-
-		public RegisterModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
-		{
-			_signInManager = signInManager;
-			_userManager = userManager;
-
-		}
-
-		public void OnGet()
-		{
-		}
-
-		public async Task<IActionResult> OnPost()
-		{
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
 
-			if (string.IsNullOrEmpty(Password))
-			{
-				return Page();
-			}
+        public string? Username { get; set; }
 
-			IdentityUser newUser = new()
-			{
-				UserName = Username
-			};
+        public string? Password { get; set; }
 
-			var createUserResult = await _userManager.CreateAsync(newUser, Password);
+        public RegisterModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+
+        }
+
+        public void OnGet()
+        {
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
 
 
-			if (createUserResult.Succeeded)
-			{
+            //if (string.IsNullOrEmpty(Password))
+            //{
+            //    return Page();
+            //}
+
+            IdentityUser newUser = new()
+            {
+                UserName = Username
+            };
+
+            var createUserResult = await _userManager.CreateAsync(newUser, Password);
 
 
-				IdentityUser? userToLogIn = await _userManager.FindByNameAsync(Username);
+            if (createUserResult.Succeeded)
+            {
 
-				var signInResult = await _signInManager.PasswordSignInAsync(userToLogIn, Password, false, false);
 
-				if (signInResult.Succeeded)
-				{
-					return RedirectToPage("/Member/Index");
-				}
-				else
-				{
+                IdentityUser? userToLogIn = await _userManager.FindByNameAsync(Username);
 
-				}
+                var signInResult = await _signInManager.PasswordSignInAsync(userToLogIn, Password, false, false);
 
-			}
-			else
-			{
+                if (signInResult.Succeeded)
+                {
+                    return RedirectToPage("/Account/LogIn");
+                }
+                else
+                {
 
-			}
+                }
 
-			return Page();
+            }
+            else
+            {
 
-		}
-	}
+            }
+
+            return Page();
+
+        }
+    }
 
 }
